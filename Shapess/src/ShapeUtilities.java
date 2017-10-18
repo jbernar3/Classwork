@@ -2,7 +2,7 @@ import java.util.Random;
 public class ShapeUtilities {
 	public static double sumArea(Shape[] shapeArray)
 	{
-		int output = 0;
+		double output = 0;
 		for (Shape sh : shapeArray)
 		{
 			output += sh.area();
@@ -11,7 +11,7 @@ public class ShapeUtilities {
 	}
 	public static double sumPerimeter(Shape[] shapeArray)
 	{
-		int output = 0;
+		double output = 0;
 		for (Shape sh : shapeArray)
 		{
 			output += sh.perimeter();

@@ -1,4 +1,3 @@
-
 public class Circle implements Shape{
 	private double radius;
 	private static double pi=3.14;
@@ -14,4 +13,8 @@ public class Circle implements Shape{
 	{
 		return 2*pi*radius;
 	}
+	 public String toString()
+	   {
+	        return "Circle radius is " + this.radius + "\tCircle area is " + this.area() + "\tCircle circumference is " + this.perimeter();   
+	   }
 }

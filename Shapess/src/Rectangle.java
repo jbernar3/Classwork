@@ -17,4 +17,8 @@ public class Rectangle implements Shape{
 		this.length = length;
 		this.width = width;
 	}
+	 public String toString()
+	    {
+	        return "Rectangle length is " + this.length + "\tRectangle width is  "+ this.width + "\tRectangle area is " + this.area() + "\tRectangle perimeter is " + this.perimeter();   
+	    }
 }
