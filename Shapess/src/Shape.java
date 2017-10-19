@@ -1,6 +1,7 @@
 
 public interface Shape {
-	public abstract double perimeter();
-	public abstract double area();
-	public abstract String toString();
+	
+	public abstract double perimeter(); //perimeter of the shape.
+	public abstract double area(); //area of the shape.
+	public abstract String toString(); //creates string that has information about the shape.
 }

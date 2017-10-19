@@ -15,12 +15,9 @@ public class Square extends Rectangle {
         this.side = side;
     }
 
-    /*
-     * @returns a String.
-     * The String contains the information of the Square generated.
-     */
+    //@return String that has information on Square being created.
     public String toString()
     {
-        return "Square side length is " + this.side + "\tSquare area is " + this.area() + "\tSquare perimeter is " + this.perimeter();   
+        return "Squa. length is " + this.side + "\tSqua. area is " + this.area() + "\tSqua. perimeter is " + this.perimeter();   
     }
 }
