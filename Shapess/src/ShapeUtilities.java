@@ -34,7 +34,7 @@ public class ShapeUtilities {
 	public static Shape getRandomShape()
 	{
 		Random r = new Random();
-		int x = r.nextInt(3);
+		int x = r.nextInt(5);
 		switch(x)
 		{
 		case 0:
@@ -46,6 +46,10 @@ public class ShapeUtilities {
 		case 2:
 			return new Square(r.nextInt(100) + 1);
 		
+		case 3:
+			return new Rhombus((r.nextInt(100) + 1),(r.nextInt(100) + 1),(r.nextInt(100) + 1));
+		case 4:
+			return new Triangle((r.nextInt(100) + 1),(r.nextInt(100) + 1),(r.nextInt(100) + 1));
 		default:
 			return getRandomShape();
 		

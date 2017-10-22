@@ -2,7 +2,7 @@
 public class Rectangle implements Shape{
 	private double length;
 	private double width;
-	//@return perimeter of the area.
+	//@return perimeter of the rectangle.
 	public double perimeter()
 	{
 		return length*2 + width*2;
