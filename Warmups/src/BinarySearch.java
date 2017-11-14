@@ -27,6 +27,7 @@ public class BinarySearch {
 				return binarySearch(nums, query, first, index-1);
 			}
 			
+			//had to add one to index
 			return binarySearch(nums, query, index+1, last);
 		}
 		return -1;
