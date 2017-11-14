@@ -18,12 +18,16 @@ public class BinarySearch {
 			int guess = nums[index];
 			
 			if (guess == query)
+			{
 				return index;
+			}
 			
 			if (guess > query)
+			{
 				return binarySearch(nums, query, first, index-1);
+			}
 			
-			return binarySearch(nums, query, index, last);
+			return binarySearch(nums, query, index+1, last);
 		}
 		return -1;
 	}
