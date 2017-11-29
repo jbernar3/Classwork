@@ -102,6 +102,7 @@ public class Lab3_3
 	 * @param int[] array
 	 * @param int x starting position of interval inclusive
 	 * @param int y ending position of interval inclusive
+	 * @return void
 	 */
 	public static void moveOver(int[]array, int x, int z)
 	{
@@ -116,6 +117,9 @@ public class Lab3_3
 	
 	/*
 	 * Selection Sort function 
+	 * Sorts an array of doubles by finding the lowest element and placing it in the front of the array.
+	 * @param double[] list1
+	 * @return void
 	 */
 	public static void selectionSort(double [] list1)
 	{
@@ -137,6 +141,13 @@ public class Lab3_3
 			list1[i]= smallest;
 		}
 	}
+	
+	/*
+	 * Bubble Sort
+	 * Iterates through the list and swapping any out of order elements until there are no more swaps required.
+	 * @param String[] list1
+	 * @return void
+	 */
 	public static void bubbleSort(String[] list1)
 	{
 		boolean swapZero = false;
