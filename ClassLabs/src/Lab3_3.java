@@ -9,7 +9,7 @@ public class Lab3_3
 	public static void main( String[] args)
 	{
 		System.out.println("INSERTION SORT");
-		int[] test1 = {7,3,5,4,5,9,8};
+		int[] test1 = {4,3,8,7,6};
 		insertionSort(test1);
 		for(int x: test1)
 		{
@@ -57,7 +57,7 @@ public class Lab3_3
 	{
 		for (int i=0; i<list1.length-1; i++)
 		{
-				//System.out.println(list1[i]+"major");
+			
 				if (list1[i+1]<list1[i])
 				{
 					boolean foundPlace= false;
@@ -68,11 +68,9 @@ public class Lab3_3
 						if(j==-1)
 						{
 							foundPlace=true;
-							//System.out.println("Found start" + j);
 						}
 						else if(list1[j]<list1[i+1])
 						{
-							//System.out.println("Found bigger" + list1[j]);
 							foundPlace=true;
 						}
 						else
@@ -81,17 +79,10 @@ public class Lab3_3
 						}
 					
 					}
-					//System.out.println("i="+ i+ " " + list1[i+1]);
 					int dummy= list1[i+1];
-					//System.out.println(dummy + "dummy");
 					moveOver(list1, j+1,i+1);
 					list1[j+1]= dummy;
-				/*
-					for(int x: list1)
-					{
-						System.out.print("["+ x +"]");
-					}
-				*/
+
 				}
 			}
 	}

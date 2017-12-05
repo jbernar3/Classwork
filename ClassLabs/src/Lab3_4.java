@@ -3,13 +3,13 @@ public class Lab3_4 {
 	public static void main( String[] args)
 	{
 		System.out.println("PARTITION TEST");
-		int[] test1= {5,2,8,1,9,6,0};
+		int[] test1= {2,5,4,3,6,8};
 		partition(test1,0,test1.length-1);
 		for(int x: test1)
 		{
 			System.out.print("["+ x +"]");
 		}
-		//System.out.println(partition(test1,0,test1.length-1));
+	/*	//System.out.println(partition(test1,0,test1.length-1));
 		System.out.println();
 		System.out.println("SWAP TEST");
 		int[] test2 = {1,2,3,4};
@@ -20,12 +20,13 @@ public class Lab3_4 {
 		}
 		System.out.println();
 		System.out.println("QUICK SORT TEST");
-		int[] test3={6,5,8,3,9,10,4};
+		int[] test3={3,6,4,8,2,5,9};
 		quickSort(test3,0,test3.length-1);
 		for(int x: test3)
 		{
 			System.out.print("["+ x +"]");
 		}
+	*/
 	}
 	
 	/*
@@ -41,7 +42,7 @@ public class Lab3_4 {
 		int positionPivot = front;
 		int frontIndex = front+1;
 		int backIndex = back;
-		//System.out.println(list1[frontIndex] +" " + list1[backIndex] + " " + list1[positionPivot]);
+		System.out.println(list1[frontIndex] +" " + list1[backIndex] + " " + list1[positionPivot]);
 		boolean searchingBack = true;
 		boolean searchingFront = false;
 		while(backIndex>frontIndex)
@@ -70,7 +71,6 @@ public class Lab3_4 {
 				int j = 0;
 				j = positionPivot;
 				positionPivot = frontIndex;
-				//frontIndex =j;
 				swapMethod(list1, j, positionPivot);
 			
 				backIndex = j-1;
@@ -111,13 +111,8 @@ public class Lab3_4 {
 	 */
 	public static void quickSort(int[] list1, int front, int back)
 	{
-		if(front==back)
+		if (front<back)
 		{
-			//System.out.println("front");
-		}
-		else
-		{
-			//System.out.println("else statement");
 			int positionPivot = partition(list1,front,back);
 			quickSort(list1,front,positionPivot);
 			quickSort(list1,positionPivot+1,list1.length-1);
