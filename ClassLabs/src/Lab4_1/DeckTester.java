@@ -12,6 +12,7 @@ public class DeckTester {
 		String[] suits = {"King","Nothing","Average"};
 		int[] pointValues = {1,2,3,4,5,6,7};
 		Deck testDeck = new Deck(ranks,suits,pointValues);
+		testDeck.shuffle();
 		for(int i=0; i<testDeck.size(); i++)
 		{
 			System.out.print(testDeck.unDealt.get(i).toString());

@@ -64,7 +64,8 @@ public class Deck{
 				index2 = rand.nextInt(this.unDealt.size());
 			}
 			Card dummy = unDealt.get(index);
-			
+			unDealt.set(index, (unDealt.get(index2)));
+			unDealt.set(index2, dummy);
 		}
 	}
 
