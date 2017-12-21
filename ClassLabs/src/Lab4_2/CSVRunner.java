@@ -6,11 +6,17 @@ import java.util.List;
 public class CSVRunner {
 	public static void main(String[] args)
 	{
-		CSVUtilities test = new CSVUtilities("DOITT_SUBWAY_ENTRANCE_01_13SEPT2010.csv");
-		ArrayList<String> header = test.getColumnHeaders();
+		CSVUtilities test = new CSVUtilities("Demographic_Statistics_By_Zip_Code.csv");
+	/*	ArrayList<String> header = test.getColumnHeaders();
 		for(int i=0; i<header.size(); i++)
 		{
-			System.out.println(header.get(i));
+			System.out.print("["+header.get(i)+"]");
+		}*/
+		ArrayList<String> columnSet=test.getDataString(0);
+		ArrayList<Double> count=test.getDataDouble(3);
+		for(int i=0; i<count.size(); i++)
+		{
+			System.out.print("["+columnSet.get(i)+" && "+(count.get(i)*100)+"]");
 		}
 	}
 }

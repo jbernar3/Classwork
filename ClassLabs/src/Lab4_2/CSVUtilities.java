@@ -14,27 +14,31 @@ public class CSVUtilities {
 
 	public CSVUtilities(String fileName)
 	{
-		
+		ArrayList<String> CSVData = new ArrayList<>();
 		Path pathToFile = Paths.get(fileName);
 		
-		String line = null;
+		
 		try (BufferedReader br = Files.newBufferedReader(pathToFile))
 		{
-			while ((line = br.readLine())!=null)
+			String line = br.readLine();
+			while (line !=null)
 			{
-				this.CSVData.add(line);
+				String[] row = line.split(",");
+				for(String x : row)
+				{
+					CSVData.add(x);
+				}
+				line = br.readLine();
+				this.numColumns = row.length;
 			}
+			br.close();
 		}
 		
 		catch (IOException ioe)
 		{
 			ioe.printStackTrace();
 		}	
-		if (CSVData.isEmpty()==false)
-		{
-			String[] row = this.CSVData.get(0).split(",");
-			this.numColumns = row.length;
-		}
+		this.CSVData = CSVData;
 	}
 	
 	public ArrayList<String> getColumnHeaders()
@@ -55,5 +59,43 @@ public class CSVUtilities {
 			columnSet.add(this.CSVData.get(i));
 		}
 		return columnSet;
+	}
+	
+	public ArrayList<Integer> getDataInt(int column)
+	{
+		ArrayList<Integer> columnIntSet = new ArrayList<>();
+		for (int i=column; i<this.CSVData.size(); i+=this.numColumns)
+		{
+			Integer dataInt = null;
+			try {
+				dataInt = Integer.parseInt(this.CSVData.get(i));
+			}
+			catch(NumberFormatException e) {
+				i+=this.numColumns;
+				continue;
+			}
+			columnIntSet.add(dataInt);
+		}
+		return columnIntSet;
+		
+	}
+	
+	public ArrayList<Double> getDataDouble(int column)
+	{
+		ArrayList<Double> columnDoubleSet = new ArrayList<>();
+		for (int i=column; i<this.CSVData.size(); i+=this.numColumns)
+		{
+			Double dataDouble = null;
+			try {
+				dataDouble = Double.parseDouble(this.CSVData.get(i));
+			}
+			catch(NumberFormatException e) {
+				i++;
+				continue;
+			}
+			columnDoubleSet.add(dataDouble);
+		}
+		return columnDoubleSet;
+		
 	}
 }
