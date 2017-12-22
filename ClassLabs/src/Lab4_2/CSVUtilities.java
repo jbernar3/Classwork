@@ -30,6 +30,7 @@ public class CSVUtilities {
 				}
 				line = br.readLine();
 				this.numColumns = row.length;
+				System.out.println(this.numColumns);
 			}
 			br.close();
 		}
@@ -77,7 +78,6 @@ public class CSVUtilities {
 			columnIntSet.add(dataInt);
 		}
 		return columnIntSet;
-		
 	}
 	
 	public ArrayList<Double> getDataDouble(int column)
@@ -90,7 +90,7 @@ public class CSVUtilities {
 				dataDouble = Double.parseDouble(this.CSVData.get(i));
 			}
 			catch(NumberFormatException e) {
-				i++;
+				//i++;
 				continue;
 			}
 			columnDoubleSet.add(dataDouble);
