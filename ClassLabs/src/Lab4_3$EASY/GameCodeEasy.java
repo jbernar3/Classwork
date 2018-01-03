@@ -33,6 +33,8 @@ public class GameCodeEasy extends Application{
 		button.setMaxSize(300, 325);
 		int score = 0;
 		Label label = new Label(""+score);
+		Button startButton = new Button("START",label);
+	
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask()
 		{
@@ -53,7 +55,9 @@ public class GameCodeEasy extends Application{
 		});
 		StackPane root = new StackPane();
 		root.getChildren().add(hbox);
-		root.getChildren().add(label);
+		root.getChildren().add(startButton);
+		startButton.setTranslateX(-400);
+		startButton.setTranslateY(400);
 		primaryStage.setScene(new Scene(root, 800, 800));
 		primaryStage.show();
 	}
