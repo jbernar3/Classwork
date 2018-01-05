@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 public class GameCodeEasy extends Application{
 	int score = 0;
 	boolean gameOn = false;
+	long timeStep;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -40,36 +41,16 @@ public class GameCodeEasy extends Application{
 		Button startButton = new Button("START",label);
 		startButton.setAlignment(Pos.TOP_LEFT);
 		
+		Label label2 = new Label("PLAY! GOOD LUCK!");
+		
 		HBox hbox = new HBox(button,label);
 		hbox.setAlignment(Pos.CENTER);
 		hbox.setPrefSize(20, 20);
 		
-		//ANIMATION TIMER
-		new AnimationTimer()
-		{
-			public void handle(long now)
-			{
-				//if ()
-			}
-		};
 		
-		//START BUTTON ACTION
-		startButton.setOnAction(value-> {
-			gameOn = !gameOn;
-			if (gameOn)
-			{
-				startButton.setText("STOP");
-			}
-			else
-			{
-				startButton.setText("START");
-			}
-			
-		});
 		
 		//PICTURE BUTTON ACTION
 		button.setOnAction(value -> {
-			
 			if (gameOn)
 			{
 				hbox.setTranslateX(Math.random()*600-300);
@@ -79,13 +60,52 @@ public class GameCodeEasy extends Application{
 			label.setText(""+score);
 		});
 		
+		
+		//ANIMATION TIMER
+		timeStep = System.nanoTime()+5000000000L;
+		AnimationTimer time = new AnimationTimer()
+		{
+			public void handle(long now)
+			{
+				if (now>timeStep && gameOn)
+				{
+					gameOn=false;
+					label2.setText("TIMER DONE");
+					startButton.setText("START");
+				}
+				else 
+				{
+					gameOn=true;
+				}
+			}
+		};
+		
+		//START BUTTON ACTION
+		startButton.setOnAction(value-> {
+			gameOn = !gameOn;
+			if (gameOn)
+			{
+				time.start();
+				startButton.setText("STOP");
+			}
+			else
+			{
+				startButton.setText("START");
+			}
+			
+		});
+		
 		StackPane root = new StackPane();
 		root.getChildren().add(hbox);
 		root.getChildren().add(startButton);
+		root.getChildren().add(label2);
+		
 		startButton.setTranslateX(-40);
 		startButton.setTranslateY(40);
 		primaryStage.setScene(new Scene(root, 800, 800));
 		primaryStage.show();
+
+		
 	}
 	
 	public static void main(String[] args)
