@@ -3,15 +3,7 @@ package Lab4_3$EASY;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-
-
-import java.io.File;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.io.FileInputStream;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -28,63 +20,80 @@ public class GameCodeEasy extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
 		primaryStage.setTitle("Bron Clicker");
 		
+		//GRAPHICS
 		FileInputStream input = new FileInputStream("lebron3.png");
 		Image image = new Image(input);
 		ImageView imageView = new ImageView(image);
-		Button button = new Button("CLICK",imageView);
+		
+		FileInputStream input2 = new FileInputStream("lebron5.png");
+		Image image2 = new Image(input2);
+		
+		//IMAGE BUTTON
+		Button button = new Button("",imageView);
 		button.setMinSize(200, 225);
-		button.setMaxSize(300, 325);
+		button.setMaxSize(200, 225);
+		button.setStyle("-fx-background-color: #ffffff; -fx-border-width: 5px; -fx-border-color: #cc0000");
 		
-		Label label = new Label(""+score);
-		Button startButton = new Button("START",label);
-		startButton.setAlignment(Pos.TOP_LEFT);
+		//SCORE LABEL
+		Label labelScore = new Label(""+score);
+		labelScore.setTranslateX(-380);
+		labelScore.setTranslateY(-370);
+		labelScore.setStyle("-fx-font-size: 2em; -fx-font-weight: bold;");
 		
-		Label label2 = new Label("PLAY! GOOD LUCK!");
+		//START BUTTON
+		Button startButton = new Button("START");
+		startButton.setTranslateY(-367);
+		startButton.setTranslateX(338);
+		startButton.setStyle("-fx-border-color: #0000cc; -fx-border-width: 5px; -fx-background-color: #ffffff; -fx-font-size: 2em; -fx-font-weight: bold;");
 		
-		HBox hbox = new HBox(button,label);
+		//MESSAGE LABEL
+		Label labelMessage = new Label("CLICK START TO PLAY\nyou have five seconds");
+		labelMessage.setTranslateY(-360);
+		labelMessage.setStyle("-fx-font-size: 2em; -fx-font-weight: bold;");
+		
+		//RESULT LABEL
+		Label labelFinal = new Label("-----------");
+		labelFinal.setTranslateY(370);
+		labelFinal.setStyle("-fx-font-size: 2em; -fx-font-weight: bold;");
+		
+		//HBOX
+		HBox hbox = new HBox(button);
 		hbox.setAlignment(Pos.CENTER);
 		hbox.setPrefSize(20, 20);
-		
-		
-		
-		//PICTURE BUTTON ACTION
-		button.setOnAction(value -> {
-			if (gameOn)
-			{
-				hbox.setTranslateX(Math.random()*600-300);
-				hbox.setTranslateY(Math.random()*600-300);
-				score++;
-			}
-			label.setText(""+score);
-		});
-		
-		
-		//ANIMATION TIMER
-		timeStep = System.nanoTime()+5000000000L;
-		AnimationTimer time = new AnimationTimer()
-		{
-			public void handle(long now)
-			{
-				if (now>timeStep && gameOn)
-				{
-					gameOn=false;
-					label2.setText("TIMER DONE");
-					startButton.setText("START");
-				}
-				else 
-				{
-					gameOn=true;
-				}
-			}
-		};
 		
 		//START BUTTON ACTION
 		startButton.setOnAction(value-> {
 			gameOn = !gameOn;
 			if (gameOn)
 			{
+				score = 0;
+				timeStep = System.nanoTime()+5000000000L;
+				AnimationTimer time = new AnimationTimer()
+				{
+					public void handle(long now)
+					{
+						if (now>timeStep)
+						{
+							gameOn=false;
+							labelMessage.setText("TIMER DONE");
+							labelFinal.setText("YOU SCORED "+score);
+							startButton.setText("START");
+							button.setStyle("-fx-background-color: #ffffff; -fx-border-width: 5px; -fx-border-color: #cc0000");
+							button.setGraphic(new ImageView(image));
+						}
+						else 
+						{
+							labelMessage.setText("CLICK CLICK CLICK");
+							gameOn=true;
+							button.setStyle("-fx-background-color: #ffffff; -fx-border-width: 5px; -fx-border-color: #00b300");
+							button.setGraphic(new ImageView(image2));
+						}
+					}
+				};
+
 				time.start();
 				startButton.setText("STOP");
 			}
@@ -95,13 +104,25 @@ public class GameCodeEasy extends Application{
 			
 		});
 		
+		//PICTURE BUTTON ACTION
+		button.setOnAction(value -> {
+			if (gameOn)
+			{
+				hbox.setTranslateX(Math.random()*550-300);
+				hbox.setTranslateY(Math.random()*500-200);
+				score++;
+			}
+			labelScore.setText(""+score);
+		});
+		
+		
 		StackPane root = new StackPane();
 		root.getChildren().add(hbox);
 		root.getChildren().add(startButton);
-		root.getChildren().add(label2);
+		root.getChildren().add(labelMessage);
+		root.getChildren().add(labelScore);
+		root.getChildren().add(labelFinal);
 		
-		startButton.setTranslateX(-40);
-		startButton.setTranslateY(40);
 		primaryStage.setScene(new Scene(root, 800, 800));
 		primaryStage.show();
 
