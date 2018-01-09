@@ -22,6 +22,7 @@ public class GameCodeEasy extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		
 		primaryStage.setTitle("Bron Clicker");
+		BackEndEasy.writeCSV();
 		
 		//GRAPHICS
 		FileInputStream input = new FileInputStream("lebron3.png");
@@ -59,6 +60,13 @@ public class GameCodeEasy extends Application{
 		labelFinal.setTranslateY(370);
 		labelFinal.setStyle("-fx-font-size: 2em; -fx-font-weight: bold;");
 		
+		//HIGHSCORE LABEL
+		Label labelHigh = new Label("highscore:"+BackEndEasy.getHighScore());
+		labelHigh.setStyle("-fx-font-size: 2em; -fx-font-weight: bold;");
+		labelHigh.setTranslateY(370);
+		labelHigh.setTranslateX(325);
+				
+		
 		//HBOX
 		HBox hbox = new HBox(button);
 		hbox.setAlignment(Pos.CENTER);
@@ -80,7 +88,9 @@ public class GameCodeEasy extends Application{
 							gameOn=false;
 							labelMessage.setText("TIMER DONE");
 							labelFinal.setText("YOU SCORED "+score);
+							BackEndEasy.addScore(score);
 							startButton.setText("START");
+							labelHigh.setText("Highscore: "+BackEndEasy.getHighScore());
 							button.setStyle("-fx-background-color: #ffffff; -fx-border-width: 5px; -fx-border-color: #cc0000");
 							button.setGraphic(new ImageView(image));
 						}
@@ -122,6 +132,7 @@ public class GameCodeEasy extends Application{
 		root.getChildren().add(labelMessage);
 		root.getChildren().add(labelScore);
 		root.getChildren().add(labelFinal);
+		root.getChildren().add(labelHigh);
 		
 		primaryStage.setScene(new Scene(root, 800, 800));
 		primaryStage.show();
