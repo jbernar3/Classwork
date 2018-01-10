@@ -8,39 +8,45 @@ import java.util.ArrayList;
 import Lab4_2.CSVUtilities;
 
 public class BackEndEasy {
-	static StringBuilder sb = new StringBuilder();
-
-	public static PrintWriter writeCSV()
+	
+	public PrintWriter pw = null;
+	
+	public BackEndEasy()
 	{
-		PrintWriter pw = null;{
+		StringBuilder sb = new StringBuilder();
 		try
 		{
-			pw = new PrintWriter(new File("results.csv"));
+			this.pw = new PrintWriter(new File("results2.csv"));
 		}
 		catch(FileNotFoundException e)
 		{
 			System.err.println(e);
 		}
 		sb.append("Name,High Score\n");
-		pw.write(sb.toString());
-		pw.close();
-		}
-		return pw;
+		this.pw.write(sb.toString());
+		this.pw.flush();
+		System.out.println(sb.toString());
+		
 	}
-	
-	public static void addScore(int score)
+
+
+	public void addScore(int score)
 	{
+		StringBuilder sb = new StringBuilder();
 		sb.append("----,"+score+"\n");
+		System.out.println(sb.toString());
+		this.pw.write(sb.toString());
+		this.pw.flush();
 	}
 	
-	public static int getHighScore()
+	public int getHighScore()
 	{
 		ArrayList<Integer> column = new ArrayList<>();
-		CSVUtilities test = new CSVUtilities("results.csv");
-		column = test.getDataInt(1);
+		CSVUtilities test = new CSVUtilities("results2.csv");
+		column = test.getDataInt(0);
 		if(column.size()==0)
 		{
-			return 0;
+			return 5;
 		}
 		int high = 0;
 		for(int i=1; i<column.size(); i++)
@@ -55,7 +61,7 @@ public class BackEndEasy {
 					j=column.size();
 				}
 			}
-		}
+		} 
 		return high;
 	} 
 }

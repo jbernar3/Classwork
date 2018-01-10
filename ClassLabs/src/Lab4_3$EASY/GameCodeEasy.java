@@ -5,6 +5,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.FileInputStream;
+import java.io.PrintWriter;
+
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,12 +19,16 @@ public class GameCodeEasy extends Application{
 	int score = 0;
 	boolean gameOn = false;
 	long timeStep;
+	boolean scoreAdded = false;
+	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
 		primaryStage.setTitle("Bron Clicker");
-		BackEndEasy.writeCSV();
+		
+		//MAKING CSV 
+		BackEndEasy csv = new BackEndEasy();
 		
 		//GRAPHICS
 		FileInputStream input = new FileInputStream("lebron3.png");
@@ -61,7 +67,7 @@ public class GameCodeEasy extends Application{
 		labelFinal.setStyle("-fx-font-size: 2em; -fx-font-weight: bold;");
 		
 		//HIGHSCORE LABEL
-		Label labelHigh = new Label("highscore:"+BackEndEasy.getHighScore());
+		Label labelHigh = new Label("highscore:"+csv.getHighScore());
 		labelHigh.setStyle("-fx-font-size: 2em; -fx-font-weight: bold;");
 		labelHigh.setTranslateY(370);
 		labelHigh.setTranslateX(325);
@@ -88,15 +94,21 @@ public class GameCodeEasy extends Application{
 							gameOn=false;
 							labelMessage.setText("TIMER DONE");
 							labelFinal.setText("YOU SCORED "+score);
-							BackEndEasy.addScore(score);
+							if (!scoreAdded)
+							{
+								csv.addScore(score);
+								scoreAdded = true;
+							}
 							startButton.setText("START");
-							labelHigh.setText("Highscore: "+BackEndEasy.getHighScore());
+							labelHigh.setText("Highscore: "+csv.getHighScore());
 							button.setStyle("-fx-background-color: #ffffff; -fx-border-width: 5px; -fx-border-color: #cc0000");
 							button.setGraphic(new ImageView(image));
 						}
 						else 
 						{
+							scoreAdded = false;
 							labelMessage.setText("CLICK CLICK CLICK");
+							labelFinal.setText("-----------");
 							gameOn=true;
 							button.setStyle("-fx-background-color: #ffffff; -fx-border-width: 5px; -fx-border-color: #00b300");
 							button.setGraphic(new ImageView(image2));
