@@ -137,7 +137,6 @@ public class GameCodeEasy extends Application{
 			labelScore.setText(""+score);
 		});
 		
-		
 		StackPane root = new StackPane();
 		root.getChildren().add(hbox);
 		root.getChildren().add(startButton);

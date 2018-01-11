@@ -98,4 +98,5 @@ public class CSVUtilities {
 		return columnDoubleSet;
 		
 	}
+
 }
