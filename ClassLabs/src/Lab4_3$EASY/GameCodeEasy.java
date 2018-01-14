@@ -5,8 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.FileInputStream;
-import java.io.PrintWriter;
-
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,7 +19,7 @@ public class GameCodeEasy extends Application{
 	boolean gameOn = false;
 	long timeStep;
 	boolean scoreAdded = false;
-	
+	TextArea inputName = new TextArea();
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -37,6 +36,13 @@ public class GameCodeEasy extends Application{
 		
 		FileInputStream input2 = new FileInputStream("lebron5.png");
 		Image image2 = new Image(input2);
+		
+		//TEXT AREA
+		inputName.setStyle("-fx-background-color: #ffffff; -fx-border-width: 5px; -fx-border-color: #cc0000");
+		inputName.setMinSize(100, 50);
+		inputName.setMaxSize(100, 50);
+		inputName.setTranslateX(-340);
+		inputName.setTranslateY(370);
 		
 		//IMAGE BUTTON
 		Button button = new Button("",imageView);
@@ -67,10 +73,10 @@ public class GameCodeEasy extends Application{
 		labelFinal.setStyle("-fx-font-size: 2em; -fx-font-weight: bold;");
 		
 		//HIGHSCORE LABEL
-		Label labelHigh = new Label("highscore:"+csv.getHighScore());
-		labelHigh.setStyle("-fx-font-size: 2em; -fx-font-weight: bold;");
+		Label labelHigh = new Label(csv.getHighScore());
+		labelHigh.setStyle("-fx-font-size: 1em; -fx-font-weight: bold;");
 		labelHigh.setTranslateY(370);
-		labelHigh.setTranslateX(325);
+		labelHigh.setTranslateX(300);
 				
 		
 		//HBOX
@@ -94,13 +100,19 @@ public class GameCodeEasy extends Application{
 							gameOn=false;
 							labelMessage.setText("TIMER DONE");
 							labelFinal.setText("YOU SCORED "+score);
+							String name = "----";
+							if (inputName.getText().length()>0)
+							{
+								name = inputName.getText();
+							}
+							//String name = inputName.getText();
 							if (!scoreAdded)
 							{
-								csv.addScore(score);
+								csv.addScore(score,name);
 								scoreAdded = true;
 							}
 							startButton.setText("START");
-							labelHigh.setText("Highscore: "+csv.getHighScore());
+							labelHigh.setText(csv.getHighScore());
 							button.setStyle("-fx-background-color: #ffffff; -fx-border-width: 5px; -fx-border-color: #cc0000");
 							button.setGraphic(new ImageView(image));
 						}
@@ -144,6 +156,7 @@ public class GameCodeEasy extends Application{
 		root.getChildren().add(labelScore);
 		root.getChildren().add(labelFinal);
 		root.getChildren().add(labelHigh);
+		root.getChildren().add(inputName);
 		
 		primaryStage.setScene(new Scene(root, 800, 800));
 		primaryStage.show();

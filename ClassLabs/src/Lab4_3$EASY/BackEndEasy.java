@@ -59,18 +59,18 @@ public class BackEndEasy {
 	}
 
 
-	public void addScore(int score)
+	public void addScore(int score, String name)
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("----,"+score+"\n");
+		sb.append(name+","+score+"\n");
 		//System.out.println(sb.toString());
 		this.pw.write(sb.toString());
 		this.pw.flush();
-		this.CSVData.add("----");
+		this.CSVData.add(name);
 		this.CSVData.add(score+"");
 	}
 	
-	public int getHighScore()
+	public String getHighScore()
 	{
 		ArrayList<Integer> allScores = new ArrayList<>();
 		for (int i = 3; i<this.CSVData.size(); i+=2)
@@ -78,24 +78,24 @@ public class BackEndEasy {
 			int temp = Integer.parseInt(this.CSVData.get(i));
 			allScores.add(temp);
 		}
+
 		if(allScores.size()==0)
 		{
-			return 0;
+			return "Highscore: 0"+"\nBy ----"; 
 		}
-		int high = 0;
-		for(int i=1; i<allScores.size(); i++)
+		int high = allScores.get(0);
+		String name = "";
+		for(int i=0; i<allScores.size(); i++)
 		{
-			high = allScores.get(i);
-			for(int j=i+1; j<allScores.size(); j++)
+			for (int j=i+1; j<allScores.size(); j++)
 			{
-				if (high < allScores.get(j))
+				if (high<allScores.get(j))
 				{
 					high = allScores.get(j);
-					i=j;
-					j= allScores.size();
+					name = this.CSVData.get(i-3);
 				}
 			}
 		} 
-		return high; 
+		return "Highscore: "+high+"\nBy "+name; 
 	} 
 }
