@@ -59,14 +59,13 @@ public class BackEndEasy {
 	}
 
 
-	public void addScore(int score, String name)
+	public void addScore(int score)
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append(name+","+score+"\n");
+		sb.append("----,"+score+"\n");
 		//System.out.println(sb.toString());
 		this.pw.write(sb.toString());
 		this.pw.flush();
-		this.CSVData.add(name);
 		this.CSVData.add(score+"");
 	}
 	
@@ -81,10 +80,9 @@ public class BackEndEasy {
 
 		if(allScores.size()==0)
 		{
-			return "Highscore: 0"+"\nBy ----"; 
+			return "Highscore: 0"; 
 		}
 		int high = allScores.get(0);
-		String name = "";
 		for(int i=0; i<allScores.size(); i++)
 		{
 			for (int j=i+1; j<allScores.size(); j++)
@@ -92,10 +90,9 @@ public class BackEndEasy {
 				if (high<allScores.get(j))
 				{
 					high = allScores.get(j);
-					name = this.CSVData.get(i-3);
 				}
 			}
 		} 
-		return "Highscore: "+high+"\nBy "+name; 
+		return "Highscore: "+high; 
 	} 
 }

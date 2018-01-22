@@ -100,15 +100,12 @@ public class GameCodeEasy extends Application{
 							gameOn=false;
 							labelMessage.setText("TIMER DONE");
 							labelFinal.setText("YOU SCORED "+score);
-							String name = "----";
-							if (inputName.getText().length()>0)
-							{
-								name = inputName.getText();
-							}
+							//String name = "----";
+							
 							//String name = inputName.getText();
 							if (!scoreAdded)
 							{
-								csv.addScore(score,name);
+								csv.addScore(score);
 								scoreAdded = true;
 							}
 							startButton.setText("START");
